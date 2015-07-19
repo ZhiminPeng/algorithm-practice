@@ -1,6 +1,8 @@
 #include <iostream>
 using namespace std;
 
+
+
 int Parity(unsigned long n)
 {
   int result = 0;
