@@ -47,3 +47,40 @@ public:
         return result;
     }
 };
+
+
+// recursive solution
+class Solution {
+public:
+    vector<int> postorderTraversal(TreeNode* root) {
+        vector<int> result;
+        if(root == NULL) return result;
+        vector<int> left = postorderTraversal(root->left);
+        vector<int> right = postorderTraversal(root->right);
+        result.insert(result.end(), left.begin(), left.end());
+        result.insert(result.end(), right.begin(), right.end());
+        result.push_back(root->val);
+        return result;
+    }
+};
+
+// iterative solution
+class Solution {
+public:
+    vector<int> postorderTraversal(TreeNode* root) {
+        stack<TreeNode*> my_stack;
+        vector<int> result;
+        if (root == NULL) return result;
+        TreeNode* itr = root;
+        my_stack.push(itr);
+        while (!my_stack.empty()) {
+            itr = my_stack.top();
+            result.push_back(itr->val);
+            my_stack.pop();
+            if (itr->left) my_stack.push(itr->left);
+            if (itr->right) my_stack.push(itr->right);
+        }
+        reverse(result.begin(), result.end());
+        return result;
+    }
+};
